@@ -38,3 +38,57 @@ button {
   text-align: center;
   margin-bottom: 20px;
 }
+
+.item .category {
+  font-size: 14px !important;
+  color: #00ffaa !important;
+  font-weight: bold;
+}
+
+/* ✅ Custom Dropdown Wrapper */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* ✅ Dropdown Itself */
+.category-select {
+  width: 100%;
+  padding: 10px;
+  background: #222;
+  color: #00ffaa;
+  border: 1px solid #00ffaa;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  appearance: none;      /* ✅ Removes default arrow */
+  cursor: pointer;
+}
+
+/* ✅ Hover Effect */
+.category-select:hover {
+  background: #111;
+}
+
+/* ✅ Focus Effect */
+.category-select:focus {
+  box-shadow: 0 0 0 2px #00ffaa66;
+}
+
+/* ✅ Custom Arrow */
+.select-wrapper::after {
+  content: "▼";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #00ffaa;
+  pointer-events: none;
+}
+.category.food { color: #4ade80; }
+.category.travel { color: #60a5fa; }
+.category.shopping { color: #f472b6; }
+.category.rent { color: #facc15; }
+.category.bills { color: #fb7185; }
+.category.other { color: #a78bfa; }
