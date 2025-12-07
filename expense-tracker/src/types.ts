@@ -3,4 +3,5 @@ export type Expense = {
   title: string;
   amount: number;
   category: string;
+  type: "income" | "expense";
 };

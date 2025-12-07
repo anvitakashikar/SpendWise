@@ -5,13 +5,13 @@ type Props = {
   onAdd: (expense: Expense) => void;
 };
 
-// ✅ Category Options
 const categories = ["Food", "Travel", "Shopping", "Rent", "Bills", "Other"];
 
 export default function ExpenseForm({ onAdd }: Props) {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("Food");
+  const [type, setType] = useState<"income" | "expense">("expense");
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,27 +23,28 @@ export default function ExpenseForm({ onAdd }: Props) {
       title,
       amount: +amount,
       category,
+      type, // ✅ income or expense
     };
 
     onAdd(newExpense);
 
-    // ✅ Reset after submit
     setTitle("");
     setAmount("");
     setCategory("Food");
+    setType("expense");
   };
 
   return (
     <form onSubmit={submitHandler} className="form">
-      {/* ✅ Title Input */}
+      {/* ✅ Title */}
       <input
         type="text"
-        placeholder="Expense title"
+        placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
 
-      {/* ✅ Amount Input */}
+      {/* ✅ Amount */}
       <input
         type="number"
         placeholder="Amount"
@@ -51,7 +52,26 @@ export default function ExpenseForm({ onAdd }: Props) {
         onChange={(e) => setAmount(e.target.value)}
       />
 
-      {/* ✅ Styled Category Dropdown */}
+      {/* ✅ Type Toggle */}
+      <div className="type-toggle">
+        <button
+          type="button"
+          className={type === "expense" ? "active expense-btn" : "expense-btn"}
+          onClick={() => setType("expense")}
+        >
+          Expense
+        </button>
+
+        <button
+          type="button"
+          className={type === "income" ? "active income-btn" : "income-btn"}
+          onClick={() => setType("income")}
+        >
+          Income
+        </button>
+      </div>
+
+      {/* ✅ Category */}
       <div className="select-wrapper">
         <select
           value={category}
@@ -66,8 +86,8 @@ export default function ExpenseForm({ onAdd }: Props) {
         </select>
       </div>
 
-      {/* ✅ Submit Button */}
-      <button type="submit">Add Expense</button>
+      {/* ✅ Submit */}
+      <button type="submit">Add {type}</button>
     </form>
   );
 }
