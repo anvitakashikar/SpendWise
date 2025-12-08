@@ -140,3 +140,58 @@ button {
 .start-btn:hover {
   transform: scale(1.05);
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #020617;
+  padding: 12px 24px;
+  border-bottom: 1px solid #00ffaa33;
+}
+
+.logo {
+  color: #00ffaa;
+}
+
+.links a {
+  margin-left: 16px;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+.links a.active {
+  color: #00ffaa;
+  border-bottom: 2px solid #00ffaa;
+}
+
+.page {
+  padding: 30px;
+  text-align: center;
+}
+
+.tracker-page {
+  padding: 20px;
+}
+
+.tracker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tracker-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.tracker-left,
+.tracker-right {
+  background: #020617;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #000;
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Expense } from "../types";
+import type{ Expense } from "../types";
 import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
 import Balance from "../components/Balance";
@@ -33,22 +33,31 @@ export default function Tracker() {
   });
 
   return (
-    <div className="container">
-      <h1>💰 Finance Tracker</h1>
+    <div className="tracker-page">
+      <div className="tracker-header">
+        <h1>💰 Finance Tracker</h1>
+        <MonthFilter
+          selectedMonth={selectedMonth}
+          onChange={setSelectedMonth}
+        />
+      </div>
 
-      <MonthFilter
-        selectedMonth={selectedMonth}
-        onChange={setSelectedMonth}
-      />
+      <div className="tracker-grid">
+        {/* ✅ LEFT SIDE */}
+        <div className="tracker-left">
+          <Balance expenses={filteredExpenses} />
+          <ExpenseForm onAdd={addExpense} />
+        </div>
 
-      <Balance expenses={filteredExpenses} />
-
-      <ExpenseForm onAdd={addExpense} />
-
-      <ExpenseList
-        expenses={filteredExpenses}
-        onDelete={deleteExpense}
-      />
+        {/* ✅ RIGHT SIDE */}
+        <div className="tracker-right">
+          <h2>Transactions</h2>
+          <ExpenseList
+            expenses={filteredExpenses}
+            onDelete={deleteExpense}
+          />
+        </div>
+      </div>
     </div>
   );
 }
