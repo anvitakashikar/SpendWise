@@ -13,6 +13,11 @@ export default function ExpenseForm({ onAdd }: Props) {
   const [category, setCategory] = useState("Food");
   const [type, setType] = useState<"income" | "expense">("expense");
 
+  // ✅ TODAY AS DEFAULT DATE
+  const [date, setDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
+
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -23,7 +28,8 @@ export default function ExpenseForm({ onAdd }: Props) {
       title,
       amount: +amount,
       category,
-      type, // ✅ income or expense
+      type,
+      date, // ✅ saved
     };
 
     onAdd(newExpense);
@@ -32,11 +38,11 @@ export default function ExpenseForm({ onAdd }: Props) {
     setAmount("");
     setCategory("Food");
     setType("expense");
+    setDate(new Date().toISOString().split("T")[0]);
   };
 
   return (
     <form onSubmit={submitHandler} className="form">
-      {/* ✅ Title */}
       <input
         type="text"
         placeholder="Title"
@@ -44,12 +50,18 @@ export default function ExpenseForm({ onAdd }: Props) {
         onChange={(e) => setTitle(e.target.value)}
       />
 
-      {/* ✅ Amount */}
       <input
         type="number"
         placeholder="Amount"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
+      />
+
+      {/* ✅ Date Picker */}
+      <input
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
       />
 
       {/* ✅ Type Toggle */}
@@ -86,7 +98,6 @@ export default function ExpenseForm({ onAdd }: Props) {
         </select>
       </div>
 
-      {/* ✅ Submit */}
       <button type="submit">Add {type}</button>
     </form>
   );

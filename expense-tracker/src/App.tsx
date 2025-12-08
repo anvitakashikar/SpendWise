@@ -3,16 +3,20 @@ import type { Expense } from "./types";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import Balance from "./components/Balance";
+import MonthFilter from "./components/MonthFilter";
 import "./index.css";
 
 export default function App() {
-  // ✅ Load from localStorage safely (NO useEffect needed)
   const [expenses, setExpenses] = useState<Expense[]>(() => {
     const data = localStorage.getItem("expenses");
     return data ? JSON.parse(data) : [];
   });
 
-  // ✅ Only syncing outward is correct useEffect usage
+  // ✅ Current Month (0-11)
+  const [selectedMonth, setSelectedMonth] = useState(
+    new Date().getMonth()
+  );
+
   useEffect(() => {
     localStorage.setItem("expenses", JSON.stringify(expenses));
   }, [expenses]);
@@ -25,15 +29,31 @@ export default function App() {
     setExpenses((prev) => prev.filter((exp) => exp.id !== id));
   };
 
+  // ✅ FILTER BY MONTH
+  const filteredExpenses = expenses.filter((exp) => {
+    const expenseMonth = new Date(exp.date).getMonth();
+    return expenseMonth === selectedMonth;
+  });
+
   return (
     <div className="container">
       <h1>💰 Finance Tracker</h1>
 
-      <Balance expenses={expenses} />
+      {/* ✅ Month Selector */}
+      <MonthFilter
+        selectedMonth={selectedMonth}
+        onChange={setSelectedMonth}
+      />
+
+      {/* ✅ Monthly Balance */}
+      <Balance expenses={filteredExpenses} />
 
       <ExpenseForm onAdd={addExpense} />
 
-      <ExpenseList expenses={expenses} onDelete={deleteExpense} />
+      <ExpenseList
+        expenses={filteredExpenses}
+        onDelete={deleteExpense}
+      />
     </div>
   );
 }

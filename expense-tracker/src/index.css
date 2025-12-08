@@ -92,3 +92,15 @@ button {
 .category.rent { color: #facc15; }
 .category.bills { color: #fb7185; }
 .category.other { color: #a78bfa; }
+
+.month-select {
+  width: 100%;
+  padding: 10px;
+  margin: 12px 0;
+  border-radius: 6px;
+  background: #222;
+  color: #00ffaa;
+  border: 1px solid #00ffaa;
+  outline: none;
+  font-weight: bold;
+}
