@@ -104,3 +104,39 @@ button {
   outline: none;
   font-weight: bold;
 }
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  text-align: center;
+}
+
+.home h1 {
+  font-size: 48px;
+  color: #00ffaa;
+  margin-bottom: 10px;
+}
+
+.home p {
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+.start-btn {
+  padding: 12px 24px;
+  background: #00ffaa;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.start-btn:hover {
+  transform: scale(1.05);
+}
